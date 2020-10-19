@@ -1,6 +1,5 @@
-# CADX
 
-This repository contains tools, documentation, and the smart contract implementation of CADX.
+This repository contains tools, documentation, and the smart contract implementation of a stable coin.
 
 Here's a breakdown of where to find what:
 ```
