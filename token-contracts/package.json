@@ -1,0 +1,47 @@
+{
+  "name": "cadxtoken",
+  "version": "1.0.0",
+  "description": "CADX Token Contracts",
+  "main": "truffle-config.js",
+  "dependencies": {
+    "@openzeppelin/contracts-ethereum-package": "^2.2.3",
+    "@openzeppelin/upgrades": "^2.5.3"
+  },
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.5.3",
+    "chai": "^4.2.0",
+    "ethlint": "^1.2.5",
+    "ganache-cli": "^6.7.0",
+    "openzeppelin-test-helpers": "^0.4.3",
+    "solc": "0.5.11",
+    "solidity-coverage": "^0.7.5",
+    "truffle": "^5.0.37",
+    "truffle-flattener": "^1.4.2",
+    "truffle-hdwallet-provider": "^1.0.17"
+  },
+  "scripts": {
+    "test": "truffle test",
+    "generate-abi": "npm run generate-token-abi && npm run generate-issuer-abi && npm run generate-proxy-abi",
+    "generate-token-abi": "mkdir -p abi-out && solcjs --abi ./flattened/CADXImplementation.sol -o ./abi-out && cp ./abi-out/__flattened_CADXImplementation_sol_CADXImplementation.abi ./CADX.abi",
+    "generate-issuer-abi": "mkdir -p abi-out && solcjs --abi ./flattened/CADXIssuer.sol -o ./abi-out && cp ./abi-out/__flattened_CADXIssuer_sol_CADXIssuer.abi ./CADXIssuer.abi",
+    "generate-proxy-abi": "mkdir -p abi-out && solcjs --abi ./flattened/CADXProxy.sol -o ./abi-out && cp ./abi-out/__flattened_CADXProxy_sol_CADXProxy.abi ./CADXProxy.abi",
+    "flatten": "mkdir -p flattened && npm run flatten-token && npm run flatten-issuer && npm run flatten-proxy",
+    "flatten-token": "truffle-flattener ./contracts/CADXImplementation.sol > ./flattened/CADXImplementation.sol",
+    "flatten-issuer": "truffle-flattener ./contracts/CADXIssuer.sol > ./flattened/CADXIssuer.sol",
+    "flatten-proxy": "truffle-flattener ./contracts/CADXProxy.sol > ./flattened/CADXProxy.sol",
+    "lint": "npx ethlint -d ./contracts/ --fix",
+    "install-audit-tools": "docker pull mythril/myth",
+    "audit-token": "npm run flatten-token && mkdir -p audit-out && docker run -v $(pwd):/tmp mythril/myth analyze /tmp/flattened/CADXImplementation.sol 2>&1 | tee ./audit-out/mythril-token-audit.txt",
+    "audit-issuer": "npm run flatten-issuer && mkdir -p audit-out && docker run -v $(pwd):/tmp mythril/myth analyze /tmp/flattened/CADXIssuer.sol 2>&1 | tee ./audit-out/mythril-issuer-audit.txt",
+    "ganache": "npx ganache-cli --deterministic",
+    "get-implementation-address": "truffle exec ./getImplementationAddress.js --network",
+    "coverage": "truffle run coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/stably/cadxtoken.git"
+  },
+  "author": "Stably",
+  "license": "Perpetual software license from Stably",
+  "homepage": ""
+}

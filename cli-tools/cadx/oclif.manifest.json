@@ -1,0 +1,513 @@
+{
+  "version": "0.0.0",
+  "commands": {
+    "burn": {
+      "id": "burn",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "amount": {
+          "name": "amount",
+          "type": "option",
+          "description": "The amount of burn (e.g. 154.23)",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "supply": {
+      "id": "supply",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        }
+      },
+      "args": []
+    },
+    "transfer": {
+      "id": "transfer",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "to": {
+          "name": "to",
+          "type": "option",
+          "description": "The recipient of the transferred tokens",
+          "required": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "option",
+          "description": "The amount of transfer (e.g. 154.23)",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "issuer:member:add": {
+      "id": "issuer:member:add",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "address": {
+          "name": "address",
+          "type": "option",
+          "description": "The new issuance member to add",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "issuer:member:list": {
+      "id": "issuer:member:list",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        }
+      },
+      "args": []
+    },
+    "issuer:member:remove": {
+      "id": "issuer:member:remove",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "address": {
+          "name": "address",
+          "type": "option",
+          "description": "The issuance member to remove",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "issuer:mint:list": {
+      "id": "issuer:mint:list",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        }
+      },
+      "args": []
+    },
+    "issuer:mint:propose": {
+      "id": "issuer:mint:propose",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "to": {
+          "name": "to",
+          "type": "option",
+          "description": "The new issuance member to add",
+          "required": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "option",
+          "description": "The amount of propose (e.g. 154.23)",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "issuer:mint:reject": {
+      "id": "issuer:mint:reject",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "index": {
+          "name": "index",
+          "type": "option",
+          "description": "The index of the pending mint to reject",
+          "required": true
+        }
+      },
+      "args": []
+    },
+    "issuer:mint:send": {
+      "id": "issuer:mint:send",
+      "pluginName": "cadx",
+      "pluginType": "core",
+      "aliases": [],
+      "flags": {
+        "network": {
+          "name": "network",
+          "type": "option",
+          "description": "Ethereum network to use",
+          "options": ["ropsten", "mainnet"],
+          "default": "ropsten"
+        },
+        "sigmethod": {
+          "name": "sigmethod",
+          "type": "option",
+          "description": "Signature method for signing the transaction",
+          "required": true,
+          "options": ["privkey", "ledger"]
+        },
+        "skipconfirm": {
+          "name": "skipconfirm",
+          "type": "boolean",
+          "description": "Skip the confirmation and directly broadcast the transaction. Useful for non-interactive use.",
+          "allowNo": false
+        },
+        "nobroadcast": {
+          "name": "nobroadcast",
+          "type": "boolean",
+          "description": "Sign but do not broadcast the transaction. Output the signed transaction to stdout.",
+          "allowNo": false
+        },
+        "nonce": {
+          "name": "nonce",
+          "type": "option",
+          "description": "Override the default behavior of getting the next nonce by using a user specified nonce. Useful for retrying or queuing transactions."
+        },
+        "gaspricegwei": {
+          "name": "gaspricegwei",
+          "type": "option",
+          "description": "Override the default behavior of determining gas price based on previous few blocks by using a user specified gas price in Gwei. 1 Gwei is 1e9 Wei (a giga-wei)."
+        },
+        "privkey": {
+          "name": "privkey",
+          "type": "option",
+          "description": "[DANGER] The private key in plaintext used for signing the transaction. If provided no longer prompts the user. Useful for non-interactive use.",
+          "hidden": true,
+          "required": false
+        },
+        "hdwpath": {
+          "name": "hdwpath",
+          "type": "option",
+          "description": "Specify a custom HD wallet derivation path, or just skip the prompt for non-interactive signing.",
+          "required": false
+        },
+        "index": {
+          "name": "index",
+          "type": "option",
+          "description": "The index of the pending mint to send",
+          "required": true
+        }
+      },
+      "args": []
+    }
+  }
+}
